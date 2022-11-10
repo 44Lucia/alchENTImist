@@ -12,7 +12,7 @@ public class DBManager : MonoBehaviour
 
     [Header("Values Database")]
     private int ingredientsAmount;
-    private List<string> ingredientsName;
+    private List<Ingredient> ingredientsName;
     private int potionsAmount;
     private List<string> potionsName;
 
@@ -53,14 +53,16 @@ public class DBManager : MonoBehaviour
         return 0;
     }
 
-    private List<string> getAllIngredientsName() {
+    private List<Ingredient> getAllIngredientsName() {
         string query = "SELECT * FROM ingredients;";
         cmd = dbConnection.CreateCommand();
         cmd.CommandText = query;
         dataReader = cmd.ExecuteReader();
 
-        List<string> res = new List<string>();
-        while (dataReader.Read()) { res.Add(dataReader.GetString(1)); }
+        List<Ingredient> res = new List<Ingredient>();
+        while (dataReader.Read()) {
+            res.Add(new Ingredient(dataReader));
+        }
 
         return res;
     }
@@ -91,7 +93,7 @@ public class DBManager : MonoBehaviour
 
     /*Accesores de Ingredientes*/
     public int IngredientsAmount { get { return ingredientsAmount; } set { ingredientsAmount = value; } }
-    public List<string> IngredientsName { get { return ingredientsName; } set { ingredientsName = value; } }
+    public List<Ingredient> Ingredients { get { return ingredientsName; } set { ingredientsName = value; } }
 
     /*Accesores de Pociones*/
     public int PotionsAmount { get { return potionsAmount; } set { potionsAmount = value; } }

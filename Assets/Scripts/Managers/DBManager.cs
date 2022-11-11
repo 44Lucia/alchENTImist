@@ -14,7 +14,7 @@ public class DBManager : MonoBehaviour
     private int ingredientsAmount;
     private List<Ingredient> ingredientsName;
     private int potionsAmount;
-    private List<string> potionsName;
+    private List<Potion> potionsName;
 
     private void Awake()
     {
@@ -78,15 +78,17 @@ public class DBManager : MonoBehaviour
         return 0;
     }
 
-    private List<string> getAllPotionsName()
+    private List<Potion> getAllPotionsName()
     {
         string query = "SELECT * FROM potions;";
         cmd = dbConnection.CreateCommand();
         cmd.CommandText = query;
         dataReader = cmd.ExecuteReader();
 
-        List<string> res = new List<string>();
-        while (dataReader.Read()) { res.Add(dataReader.GetString(1)); }
+        List<Potion> res = new List<Potion>();
+        while (dataReader.Read()) {
+            res.Add(new Potion(dataReader));
+        }
 
         return res;
     }
@@ -97,5 +99,7 @@ public class DBManager : MonoBehaviour
 
     /*Accesores de Pociones*/
     public int PotionsAmount { get { return potionsAmount; } set { potionsAmount = value; } }
-    public List<string> PotionsName { get { return potionsName; } set { potionsName = value; } }
+    public List<Potion> Potions { get { return potionsName; } set { potionsName = value; } }
+
+    /*Accesores de Ordenes*/
 }

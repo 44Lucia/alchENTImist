@@ -6,6 +6,11 @@ TagManager:
   tags:
   - DragParent
   - DropParent
+  - PotionSlot
+  - IngredientSlot
+  - Potion
+  - Ingredient
+  - PositionCanvas
   layers:
   - Default
   - TransparentFX

@@ -1,17 +1,19 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class dropSlot : MonoBehaviour, IDropHandler
 {
     private GameObject item;
-    private DragHandler dragHandler;
 
     public void OnDrop(PointerEventData enventData) {
 
         if (!item){
             item = DragHandler.itemDragging;
-            item.transform.SetParent(transform);
             item.transform.position = transform.position;
+            item.transform.localScale = 0.8f * Vector3.one;
+            DragHandler.itemDragging.GetComponent<Image>().raycastTarget = true;
+            DragHandler.itemDragging = null;
         }
     }
 

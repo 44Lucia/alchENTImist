@@ -1,40 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DragHandler : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
     public static GameObject itemDragging;
 
+    private Transform transformCanvas;
+
     Vector3 startPosition;
     Transform startParent;
     Transform dragParent;
 
+    private Canvas canvasItems;
+
     private void Start()
     {
-        dragParent = GameObject.FindGameObjectWithTag("DragParent").transform;
+       transformCanvas = GameObject.FindGameObjectWithTag("PositionCanvas").transform;
+       dragParent = GameObject.FindGameObjectWithTag("DragParent").transform;
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
             
         itemDragging = gameObject;
-
+        
         startPosition = transform.position;
         startParent = transform.parent;
-        transform.SetParent(dragParent);
+
+        itemDragging = Instantiate(this.gameObject, transformCanvas);
+
+        itemDragging.GetComponent<Image>().raycastTarget = false;
     }
 
     public void OnDrag(PointerEventData eventData) {
-        transform.position = Input.mousePosition;
+        itemDragging.transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData) {
-        itemDragging = null;
-
-        if (transform.parent == dragParent){
-            transform.position = startPosition;
-            transform.SetParent(startParent);
+        if (itemDragging != null){
+            Destroy(itemDragging);
+            itemDragging = null;
         }
     }
 }

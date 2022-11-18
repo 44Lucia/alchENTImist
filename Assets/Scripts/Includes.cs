@@ -38,3 +38,20 @@ public struct Potion
         id_potion_type = p_reader.GetInt32(5);
     }
 }
+
+public struct IgrendientsPotion 
+{
+    public int id_potion_ingredient;
+    public int quantity;
+    public int id_potion;
+    public int id_ingredient;
+
+    public IgrendientsPotion(IDataReader p_reader) 
+    {
+        id_potion_ingredient = p_reader.GetInt32(0);
+        quantity = p_reader.GetInt32(1);
+        id_potion = p_reader.GetInt32(2);
+        id_ingredient= p_reader.GetInt32(3);
+    }
+
+}

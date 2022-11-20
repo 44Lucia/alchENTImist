@@ -126,6 +126,23 @@ public class DBManager : MonoBehaviour
         return res;
     }
 
+    public List<Ingredient> getPotionIngredients(int IDpotion) {
+        string query = "SELECT * FROM ingredients LEFT JOIN potions_ingredients WHERE id_potion = ";
+        query += IDpotion;
+        query += " AND potions_ingredients.id_ingredient = ingredients.id_ingredient;";
+        cmd = dbConnection.CreateCommand();
+        cmd.CommandText = query;
+        dataReader = cmd.ExecuteReader();
+
+        List<Ingredient> res = new List<Ingredient>();
+        while (dataReader.Read()) 
+        {
+            res.Add(new Ingredient(dataReader));
+        }
+
+        return res;
+    }
+
     /*Accesores de Ingredientes*/
     public int IngredientsAmount { get { return ingredientsAmount; } set { ingredientsAmount = value; } }
     public List<Ingredient> Ingredients { get { return ingredientsName; } set { ingredientsName = value; } }

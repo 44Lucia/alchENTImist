@@ -53,5 +53,53 @@ public struct IgrendientsPotion
         id_potion = p_reader.GetInt32(2);
         id_ingredient= p_reader.GetInt32(3);
     }
+}
 
+public struct OrdersPotion
+{
+    public int id_order;
+    public string date;
+    public int id_client;
+    public int id_user;
+
+    public OrdersPotion(IDataReader p_reader)
+    {
+        id_order = p_reader.GetInt32(0);
+        date = p_reader.GetString(1);
+        id_client = p_reader.GetInt32(2);
+        id_user = p_reader.GetInt32(3);
+    }
+}
+
+public struct Clients
+{
+    public int id_customer;
+    public string name;
+    public string avatar;
+
+    public Clients(IDataReader p_reader)
+    {
+        id_customer = p_reader.GetInt32(0);
+        name = p_reader.GetString(1);
+        avatar = p_reader.GetString(2);
+    }
+}
+
+public struct User
+{
+    public int id_user;
+    public string name;
+    public string date;
+    public string password;
+    public int money;
+
+    public User(IDataReader p_reader)
+    {
+        id_user = p_reader.GetInt32(0);
+        name = p_reader.GetString(1);
+        date = p_reader.GetString(2);
+        password = p_reader.GetString(3);
+        money = p_reader.GetInt32(4);
+        
+    }
 }

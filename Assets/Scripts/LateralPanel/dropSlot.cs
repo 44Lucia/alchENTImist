@@ -17,17 +17,20 @@ public class dropSlot : MonoBehaviour, IDropHandler
                 DragHandler.itemDragging.GetComponent<Image>().raycastTarget = true;
                 DragHandler.itemDragging = null;
 
-                Debug.Log("IngredienteListo");
+                item.tag = "IngredientReady";
             }
-            else if (DragHandler.itemDragging.CompareTag("Potion") && gameObject.CompareTag("PotionSlot")) 
+            else if (DragHandler.itemDragging.CompareTag("Potion") && gameObject.CompareTag("PotionSlot"))
             {
                 item = DragHandler.itemDragging;
                 item.transform.position = transform.position;
                 item.transform.localScale = 0.8f * Vector3.one;
                 DragHandler.itemDragging.GetComponent<Image>().raycastTarget = true;
                 DragHandler.itemDragging = null;
-
-                Debug.Log("PocionLista");
+            }
+            else if (gameObject.CompareTag("TrashSlot") && DragHandler.itemDragging.CompareTag("IngredientReady")) 
+            {
+                Debug.Log("borrado");
+                Destroy(DragHandler.itemDragging.gameObject);
             }
             
         }

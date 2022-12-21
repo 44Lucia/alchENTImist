@@ -11,6 +11,8 @@ TagManager:
   - Potion
   - Ingredient
   - PositionCanvas
+  - TrashSlot
+  - IngredientReady
   layers:
   - Default
   - TransparentFX

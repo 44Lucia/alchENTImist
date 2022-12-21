@@ -10,14 +10,12 @@ public class DragHandler : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginD
 
     Vector3 startPosition;
     Transform startParent;
-    Transform dragParent;
 
     private Canvas canvasItems;
 
     private void Start()
     {
        transformCanvas = GameObject.FindGameObjectWithTag("PositionCanvas").transform;
-       dragParent = GameObject.FindGameObjectWithTag("DragParent").transform;
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
@@ -26,11 +24,9 @@ public class DragHandler : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginD
 
         if (itemDragging.CompareTag("Ingredient"))
         {
-            Debug.Log("miau");
             itemDragging = Instantiate(this.gameObject, transformCanvas);
             itemDragging.GetComponent<Image>().raycastTarget = false;
         } else {
-            Debug.Log("potion");
             itemDragging = gameObject; 
             itemDragging.GetComponent<Image>().raycastTarget = false; 
         }
@@ -45,11 +41,11 @@ public class DragHandler : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginD
     }
 
     public void OnEndDrag(PointerEventData eventData) {
+
         if (itemDragging != null){
             if (gameObject.CompareTag("Ingredient"))
             {
                 Destroy(itemDragging);
-                itemDragging = null;
             }
             else
             {
@@ -57,5 +53,6 @@ public class DragHandler : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginD
                 itemDragging.transform.SetParent(startParent);
             }            
         }
+        itemDragging = null;
     }
 }

@@ -38,8 +38,7 @@ public class RecipeHandler : MonoBehaviour
 
         //Set the potion Image
         newSprite = Resources.Load<Sprite>(potionsList[numRecipe -1].iconPath);
-        if (newSprite == null)
-        {
+        if (newSprite == null){
             Debug.Log(potionsList[numRecipe -1].iconPath);
         }
         potionImg.sprite = newSprite;
@@ -60,16 +59,14 @@ public class RecipeHandler : MonoBehaviour
     }
 
     public void NextPage() {
-        if (currentRecipe < totalRecipes)
-        {
+        if (currentRecipe < totalRecipes){
             currentRecipe++;
             LoadRecipes(currentRecipe);
         }
     }
 
     public void PreviousPage() {
-        if (currentRecipe > 1) 
-        {
+        if (currentRecipe > 1){
             currentRecipe--;
             LoadRecipes(currentRecipe);
         }

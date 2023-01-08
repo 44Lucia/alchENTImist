@@ -11,7 +11,7 @@ public class DragHandler : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginD
     Vector3 startPosition;
     Transform startParent;
 
-    private Canvas canvasItems;
+    private Canvas draggingCanvas;
 
     private void Start()
     {
@@ -32,8 +32,14 @@ public class DragHandler : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginD
         }
 
 
-        startPosition = transform.position;
-        startParent = transform.parent;
+        startPosition = itemDragging.transform.position;
+        startParent = itemDragging.transform.parent;
+        itemDragging.transform.SetParent(transformCanvas);
+
+        //Canvas layer
+        draggingCanvas = itemDragging.AddComponent<Canvas>();
+        draggingCanvas.overrideSorting = true;
+        draggingCanvas.sortingOrder = 1;
     }
 
     public void OnDrag(PointerEventData eventData) {
@@ -41,6 +47,8 @@ public class DragHandler : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginD
     }
 
     public void OnEndDrag(PointerEventData eventData) {
+
+        Destroy(draggingCanvas);
 
         if (itemDragging != null){
             if (gameObject.CompareTag("Ingredient"))

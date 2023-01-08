@@ -44,7 +44,7 @@ public class RecipeHandler : MonoBehaviour
         potionImg.sprite = newSprite;
 
         //Get the Potion Ingredients
-        List<Ingredient> ingredients = dbManager.getPotionIngredients(numRecipe);
+        List<Ingredient> ingredients = dbManager.GetPotionIngredients(numRecipe);
         //Disable all slots
         for (int i = 0; i < potionIngredientIcon.Count; i++) {
             potionIngredientIcon[i].enabled = false;

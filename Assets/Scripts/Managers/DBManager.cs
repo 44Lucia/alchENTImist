@@ -132,7 +132,7 @@ public class DBManager : MonoBehaviour
         return res;
     }
 
-    public List<Ingredient> getPotionIngredients(int IDpotion) {
+    private List<Ingredient> getPotionIngredients(int IDpotion) {
         string query = "SELECT * FROM ingredients LEFT JOIN potions_ingredients WHERE id_potion = ";
         query += IDpotion;
         query += " AND potions_ingredients.id_ingredient = ingredients.id_ingredient;";
@@ -232,6 +232,7 @@ public class DBManager : MonoBehaviour
     /*Accesores de Ingredientes*/
     public int IngredientsAmount { get { return ingredientsAmount; } set { ingredientsAmount = value; } }
     public List<Ingredient> Ingredients { get { return ingredientsName; } set { ingredientsName = value; } }
+    public List<Ingredient> GetPotionIngredients(int id) { return getPotionIngredients(id); }
 
     /*Accesores de Pociones*/
     public int PotionsAmount { get { return potionsAmount; } set { potionsAmount = value; } }

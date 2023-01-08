@@ -12,6 +12,7 @@ public class dropSlot : MonoBehaviour, IDropHandler
             if (DragHandler.itemDragging.CompareTag("Ingredient") && gameObject.CompareTag("IngredientSlot"))
             {
                 item = DragHandler.itemDragging;
+                item.transform.SetParent(transform);
                 item.transform.position = transform.position;
                 item.transform.localScale = 0.8f * Vector3.one;
                 DragHandler.itemDragging.GetComponent<Image>().raycastTarget = true;
